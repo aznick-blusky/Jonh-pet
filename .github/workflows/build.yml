@@ -54,7 +54,8 @@ jobs:
           buildozer -v android debug
 
       - name: Salvataggio dell'APK generato
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: manaprisma-apk
           path: bin/*.apk
+          
