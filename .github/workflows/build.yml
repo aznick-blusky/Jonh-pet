@@ -1,0 +1,61 @@
+name: Jonh pet apk
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v3
+
+      - name: Installazione dipendenze di sistema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            python3-pip \
+            build-essential \
+            git \
+            ffmpeg \
+            libsdl2-dev \
+            libsdl2-image-dev \
+            libsdl2-mixer-dev \
+            libsdl2-ttf-dev \
+            libportmidi-dev \
+            libswscale-dev \
+            libavformat-dev \
+            libavcodec-dev \
+            zlib1g-dev \
+            libffi-dev \
+            libssl-dev \
+            autoconf \
+            automake \
+            libtool \
+            pkg-config \
+            gettext
+
+      - name: Configurazione di Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      - name: Installazione di Buildozer e Cython
+        run: |
+          pip install --upgrade pip
+          pip install cython==0.29.36 buildozer
+
+      - name: Compilazione APK con Buildozer
+        run: |
+          buildozer -v android debug
+
+      - name: Salvataggio dell'APK generato
+        uses: actions/upload-artifact@v3
+        with:
+          name: manaprisma-apk
+          path: bin/*.apk
+          
