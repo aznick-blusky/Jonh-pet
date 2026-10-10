@@ -58,4 +58,3 @@ jobs:
         with:
           name: manaprisma-apk
           path: bin/*.apk
-          
