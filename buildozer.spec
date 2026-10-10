@@ -3,6 +3,7 @@
 source.dir = .
 # (str) Title of your application
 title = John Pet
+android.accept_sdk_license = True
 
 # (str) Package name
 package.name = johnpet
