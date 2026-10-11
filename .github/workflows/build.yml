@@ -1,4 +1,4 @@
-name: Jonh pet apk
+Name: Jonh pet apk
 
 on:
   push:
@@ -51,11 +51,20 @@ jobs:
 
       - name: Compilazione APK con Buildozer
         run: |
-          buildozer -v android debug
+          buildozer -v android debug > buildozer_full_log.txt 2>&1 || true
+
+      - name: Carica il Log Completo (Senza Troncamento)
+        uses: actions/upload-artifact@v4
+        with:
+          name: buildozer-log
+          path: buildozer_full_log.txt
 
       - name: Salvataggio dell'APK generato
         uses: actions/upload-artifact@v4
         with:
           name: manaprisma-apk
           path: bin/*.apk
+          if-no-files-found: ignore
+
+
           
