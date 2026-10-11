@@ -59,9 +59,9 @@ jobs:
         run: |
           ~/.local/bin/buildozer -v android debug > buildozer_full_log.txt 2>&1 || {
             echo "=========================================="
-            echo " BUILD FALLITA: ULTIME 60 RIGHE DEL LOG"
+            echo " ECCO GLI ERRORI TROVATI NEL LOG:"
             echo "=========================================="
-            tail -n 60 buildozer_full_log.txt
+            grep -i "error" buildozer_full_log.txt || tail -n 60 buildozer_full_log.txt
             exit 1
           }
 
