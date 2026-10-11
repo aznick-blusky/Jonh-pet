@@ -50,9 +50,16 @@ jobs:
 
       - name: Compilazione APK con Buildozer
         run: |
-          ~/.local/bin/buildozer -v android debug > buildozer_full_log.txt 2>&1 || true
+          ~/.local/bin/buildozer -v android debug > buildozer_full_log.txt 2>&1 || {
+            echo "=========================================="
+            echo " BUILD FALLITA: ULTIME 60 RIGHE DEL LOG"
+            echo "=========================================="
+            tail -n 60 buildozer_full_log.txt
+            exit 1
+          }
 
       - name: Carica il Log Completo (Senza Troncamento)
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: buildozer-log
