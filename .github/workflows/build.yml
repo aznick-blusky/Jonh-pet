@@ -46,12 +46,11 @@ jobs:
 
       - name: Installazione di Buildozer e Cython
         run: |
-          pip install --upgrade pip
-          pip install cython==0.29.36 buildozer
+          pip install --user cython==0.29.36 buildozer
 
       - name: Compilazione APK con Buildozer
         run: |
-          buildozer -v android debug > buildozer_full_log.txt 2>&1 || true
+          ~/.local/bin/buildozer -v android debug > buildozer_full_log.txt 2>&1 || true
 
       - name: Carica il Log Completo (Senza Troncamento)
         uses: actions/upload-artifact@v4
