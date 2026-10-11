@@ -75,7 +75,7 @@ jobs:
       - name: Salvataggio dell'APK generato
         uses: actions/upload-artifact@v4
         with:
-          name: manaprisma-apk
+          name: john-pet-apk
           path: bin/*.apk
           if-no-files-found: ignore
           
